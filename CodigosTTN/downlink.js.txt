@@ -1,0 +1,175 @@
+function Encoder(object, port) {
+  
+  var bytes = [];
+  
+  if (object.Type == "DO")
+  {
+    //Probar con: {"Type": "DO", "DO1":1 , "DO2":1} => 02 01 01 01 (donde 1 = prendido y 0 = apagado).
+    
+    bytes[0] = 0x02;
+    bytes[3] = 0x02;
+    if (object.DO1 ==1)
+    {
+      bytes[1] = 1;
+    }
+    else if (object.DO1 ==0)
+    {
+      bytes[1] = 0;
+    }
+    else
+    {
+      bytes[1] = 17;
+    }
+
+    if (object.DO2 ==1)
+    {
+      bytes[2] = 1;
+    }
+    else if (object.DO2 ==0)
+    {
+      bytes[2] = 0;
+    }
+    else 
+    {
+      bytes[2] = 17;
+    }
+  }
+
+  if (object.Type == "RELAY")
+  {
+    //probar con: {"Type": "RELAY", "RO1":1 , "RO2":1} => 03 01 01 (donde 1 = cerrado y 0 = abierto).
+    bytes[0] = 0x03;
+    if (object.RO1 ==1)
+    {
+      bytes[1] = 1;
+    }
+    else
+    {
+      bytes[1] = 0;
+    }
+    
+    if (object.RO2 ==1)
+    {
+      bytes[2] = 1;
+    }
+    else
+    {
+      bytes[2] = 0;
+    }
+  }
+
+
+  if (object.Type == "RELAY_T")
+  {
+    //probar con: {"Type": "RELAY_T","Mode": "BACK", "RON1":1 , "RON2":2,"Time":2000} => 05 01 12 07 D0 (donde RONx 0 = normalmente cerrado, 1 = normalmente abierto, 2 = no hay accion)
+    bytes[0] = 0x05;
+    bytes[4] = (object.Time & 0xff);
+    bytes[3] = ((object.Time>>8) & 0xff);
+    if (object.Mode == "BACK") 
+    {
+      bytes[1] = 1;
+      if (object.RON1 == 0 && object.RON2 == 0) 
+      {
+        bytes[2] = 0x00;    
+      }
+      else if (object.RON1 == 0 && object.RON2 == 1) 
+      {
+        bytes[2] = 0x01;    
+      }
+      else if (object.RON1 == 0 && object.RON2 == 2) 
+      {
+        bytes[2] = 0x02;    
+      }
+      else if (object.RON1 == 1 && object.RON2 == 0) 
+      {
+        bytes[2] = 0x10;    
+      }
+      else if (object.RON1 == 1 && object.RON2 == 1) 
+      {
+        bytes[2] = 0x11;    
+      }
+      else if (object.RON1 == 1 && object.RON2 == 2) 
+      {
+        bytes[2] = 0x12;    
+      }
+      else if (object.RON1 == 2 && object.RON2 == 0) 
+      {
+        bytes[2] = 0x20;    
+      }
+      else
+      {
+        bytes[2] = 0x21;    
+      }
+    }
+    else
+    {
+      bytes[1] = 0;
+      if (object.RON1 == 0 && object.RON2 == 0) 
+      {
+        bytes[2] = 0x00;    
+      }
+      else if (object.RON1 == 0 && object.RON2 == 1) 
+      {
+        bytes[2] = 0x01;    
+      }
+      else if (object.RON1 == 0 && object.RON2 == 2) 
+      {
+        bytes[2] = 0x02;    
+      }
+      else if (object.RON1 == 1 && object.RON2 == 0) 
+      {
+        bytes[2] = 0x10;    
+      }
+      else if (object.RON1 == 1 && object.RON2 == 1) 
+      {
+        bytes[2] = 0x11;    
+      }
+      else if (object.RON1 == 1 && object.RON2 == 2) 
+      {
+        bytes[2] = 0x12;    
+      }
+      else if (object.RON1 == 2 && object.RON2 == 0) 
+      {
+        bytes[2] = 0x20;    
+      }
+      else 
+      {
+        bytes[2] = 0x21;    
+      }
+    }
+  }  
+  if (object.Type == "RESET")
+  {
+    //probar con: {"Type": "RESET"} => 04 FF
+    bytes[0] = 0x04;
+    bytes[1] = 0xFF;
+  }
+  if (object.Type == "RESET_COUNT1") 
+  {
+    //probar con: {"Type": "RESET_COUNT1"}
+    bytes[0] = 0xA8;
+    bytes[1] = 0x01;
+    bytes[2] = 0x00;
+    bytes[3] = 0x00;
+    bytes[4] = 0x00;
+    bytes[5] = 0x00;
+  }
+  if (object.Type == "PERIOD")
+  {
+    //probar con: {"Type": "PERIOD", "Seconds":60} => 01 00 00 3C
+    bytes[0] = 0x01;
+    bytes[1] = object.Seconds >> 16;
+    bytes[2] = object.Seconds >> 8; 
+    bytes[3] = object.Seconds;
+    
+  }
+
+  return bytes;
+}
+
+function decodeDownlink(bytes,port) {
+    return {
+      m: 0x00
+    }
+}
+

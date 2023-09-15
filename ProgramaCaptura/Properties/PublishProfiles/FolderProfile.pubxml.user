@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\crisz\OneDrive\Documentos\ELO308\DocumenacionExperimental\Hito2\CapturaLora\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>False|2022-09-28T19:54:04.2612982Z;False|2022-09-28T16:29:47.6210526-03:00;True|2022-05-28T19:53:48.3341514-04:00;True|2022-05-28T09:22:44.6600227-04:00;True|2022-05-27T15:28:05.7306088-04:00;True|2022-05-27T15:25:48.8102133-04:00;True|2022-05-27T14:40:14.8301002-04:00;True|2021-08-16T10:17:46.1075377-04:00;True|2021-08-15T21:17:18.2930820-04:00;True|2021-08-15T21:12:29.2302875-04:00;True|2021-08-15T18:19:50.6987478-04:00;True|2021-08-15T14:00:40.0115089-04:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Migrations/20210816141526_InitialCreate.cs">
+      <publishTime>08/16/2021 10:15:26</publishTime>
+    </File>
+    <File Include="Migrations/20210816141526_InitialCreate.Designer.cs">
+      <publishTime>08/16/2021 10:15:26</publishTime>
+    </File>
+    <File Include="Migrations/CapturaLoraContextModelSnapshot.cs">
+      <publishTime>08/16/2021 10:15:26</publishTime>
+    </File>
+  </ItemGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="CapturaLoraContext">
+      <Value>Server=www.myaqct.com%3bDatabase=LoraWan%3bTrusted_Connection=false%3bMultipleActiveResultSets=true%3bPersist Security Info=True%3bUser ID=sa%3bpassword=Arq%24Soft.,2020</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="CapturaLora.Data.CapturaLoraContext">
+      <Value>Server=www.myaqct.com%3bDatabase=LoraWan%3bTrusted_Connection=false%3bMultipleActiveResultSets=true%3bPersist Security Info=True%3bUser ID=sa%3bpassword=Arq%24Soft.,2020</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

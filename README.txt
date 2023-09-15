@@ -1,3 +1,8 @@
+//CodigosTTN
+-Estos códigos corren en la aplicación web Things Network y son usados tanto para codificar mensajes (downlinks) provenientes de la aplicación y
+transformarlos en bytes entendibles por el dispositivo como para decodificar bytes recibidos desde el dispositivo final (uplinks) y tranformarlos
+en un valor legible por la aplicación.
+
 //Programa Principal
 -Este programa contiene los códigos escenciales para crear una interfaz gráfica capaz de monitorear el estado
 de los sensores de flujo de agua, aplicar reglas de consumo y manipular las válvulas directamente.
